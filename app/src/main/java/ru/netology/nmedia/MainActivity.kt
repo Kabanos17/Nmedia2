@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
             published = "21 мая в 18:36",
             likedByMe = false,
             likes = 999,
-            shares = 0
+            shares = 999
         )
 
         with(binding) {
