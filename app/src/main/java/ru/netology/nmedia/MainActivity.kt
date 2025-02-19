@@ -20,8 +20,8 @@ class MainActivity : AppCompatActivity() {
             content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
             published = "21 мая в 18:36",
             likedByMe = false,
-            likes = 999,
-            shares = 999_999
+            likes = 1099,
+            shares = 999999
         )
 
         with(binding) {
@@ -66,20 +66,26 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private fun formatCount(count: Int): String {
+    fun formatCount(count: Int): String {
         return when {
-            count >= 1_000_000 -> {
-                String.format("%.1fM", count / 1_000_000.0).replace(",", ".")
+            count < 1000 -> count.toString() // Если меньше 1000, просто возвращаем число
+            count in 1000..9999 -> {
+                // Для диапазона от 1000 до 9999 отображаем дробную часть
+                val hundreds = count / 100 // Получаем количество сотен
+                val thousands = count / 1000 // Получаем количество тысяч
+                val decimalPart = (count % 1000) / 100 // Получаем дробную часть
+                "$thousands.$decimalPart К" // Форматируем как "1.1К"
             }
-            count >= 1_000 -> {
-                if (count < 10_000) {
-                    "${count / 100}.${(count % 100) / 10}K"
-                } else {
-                    "${count / 1_000}K" // Для 10K и выше просто K
-                }
+
+            count >= 10000 -> {
+                // Для 10К и выше просто отображаем количество тысяч
+                val thousands = count / 1000
+                "$thousands К" // Форматируем как "10К"
             }
-            else -> count.toString()
+
+            else -> count.toString() // На всякий случай
         }
+
     }
 }
 
