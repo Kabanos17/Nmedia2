@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
             published = "21 мая в 18:36",
             likedByMe = false,
             likes = 999,
-            shares = 999
+            shares = 999_999
         )
 
         with(binding) {
@@ -31,6 +31,10 @@ class MainActivity : AppCompatActivity() {
             updateLikeButton(binding)
             likeCount.text = formatCount(post.likes)
             shareCount.text = formatCount(post.shares)
+
+            root.setOnClickListener {
+                Log.d("PostActions", "Root clicked")
+            }
 
             like.setOnClickListener {
                 toggleLike(binding)
@@ -67,18 +71,15 @@ class MainActivity : AppCompatActivity() {
             count >= 1_000_000 -> {
                 String.format("%.1fM", count / 1_000_000.0).replace(",", ".")
             }
-
             count >= 1_000 -> {
-
                 if (count < 10_000) {
-                    "${count / 100}.${
-                        (count % 100) / 10
-                    }K"
+                    "${count / 100}.${(count % 100) / 10}K"
                 } else {
-                    "${count / 1_000}K"
+                    "${count / 1_000}K" // Для 10K и выше просто K
                 }
             }
             else -> count.toString()
         }
     }
 }
+
