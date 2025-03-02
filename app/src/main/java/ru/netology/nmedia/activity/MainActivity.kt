@@ -26,12 +26,19 @@ class MainActivity : AppCompatActivity() {
                     if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_24
                 )
                 likesCount.text = numberFormatter.formatCount(post.likesCount)
+                sharesCount.text = numberFormatter.formatCount(post.sharesCount)
             }
         }
 
         binding.like.setOnClickListener {
             viewModel.like()
         }
+
+        binding.share.setOnClickListener {
+            viewModel.share()
+        }
     }
 }
+
+
 
